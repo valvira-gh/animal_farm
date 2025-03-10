@@ -6,10 +6,8 @@ class LessonRepository:
         self.db = Database()
 
     def add_lesson(self, horse_id, date, duration, price, student_name):
-        sql = """
-        INSERT INTO lessons (horse_id, date, duration, price, student_name) 
-        VALUES (%s, %s, %s, %s, %s) RETURNING id
-        """
+        sql = """INSERT INTO lessons (horse_id, date, duration, price, student_name) 
+        VALUES (%s, %s, %s, %s, %s) RETURNING id"""
         return self.db.query(sql, (horse_id, date, duration, price, student_name))[0][
             "id"
         ]

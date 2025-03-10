@@ -6,10 +6,8 @@ class HorseRepository:
         self.db = Database()
 
     def add_horse(self, animal_id, breed, color, training_level, is_available):
-        sql = """
-        INSERT INTO horses (animal_id, breed, color, training_level, is_available)
-        VALUES (%s, %s, %s, %s, %s) RETURNING id
-        """
+        sql = """INSERT INTO horses (animal_id, breed, color, training_level, is_available)
+        VALUES (%s, %s, %s, %s, %s) RETURNING id"""
         return self.db.query(
             sql, (animal_id, breed, color, training_level, is_available)
         )[0]["id"]

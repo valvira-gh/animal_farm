@@ -10,10 +10,8 @@ class AnimalRepository:
         def add_animal(
             self, name: str, species: str, birth_year: int, owner_id=None, notes=None
         ):
-            sql = """
-            INSERT INTO animals (name, species, birth_year, owner_id, notes)
-            VALUES (%s, %s, %s, %s, %s) RETURNING id
-            """
+            sql = """INSERT INTO animals (name, species, birth_year, owner_id, notes)
+            VALUES (%s, %s, %s, %s, %s) RETURNING id"""
             return self.db.query(sql, (name, species, birth_year, owner_id, notes))[0][
                 "id"
             ]
