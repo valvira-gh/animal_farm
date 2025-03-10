@@ -8,7 +8,10 @@ class OwnerRepository:
         conn = Database.get_connection()
         try:
             with conn.cursor() as cur:
-                query = "INSERT INTO owners (name, phone, email) VALUES (%s, %s, %s) RETURNING id"
+                query = """
+                INSERT INTO owners (name, phone, email)
+                VALUES (%s, %s, %s) RETURNING id
+                """
                 cur.execute(query, (name, phone, email))
                 owner_id = cur.fetchone()[0]
                 conn.commit()
